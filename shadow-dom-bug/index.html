@@ -1,0 +1,26 @@
+<this-bug></this-bug>
+
+<template id="template">
+  <link rel="stylesheet" href="style.css"/>
+  <div class="foo"></div>
+  <div class="bar">
+  bar
+  </div>
+  <button class="baz">Click here to show 'foo bar'</button>
+</template>
+
+<script>
+customElements.define("this-bug", class thisBug extends HTMLElement {
+	connectedCallback() {
+    if (this.shadowRoot) {
+      return;
+    }
+    let template = document.querySelector("#template");
+    let shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.appendChild(template.content.cloneNode(true));
+    this.shadowRoot.querySelector(".baz").addEventListener("click", () => {
+      this.shadowRoot.querySelector(".foo").textContent = "foo";
+    });
+  }
+});
+</script>
