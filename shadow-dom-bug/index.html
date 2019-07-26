@@ -1,7 +1,11 @@
 <this-bug></this-bug>
 
 <template id="template">
-  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .foo:empty + .bar {
+      display: none;
+    }
+  </style>
   <div class="foo"></div>
   <div class="bar">
   bar
